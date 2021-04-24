@@ -3,6 +3,7 @@ from stl import mesh
 from PIL import Image
 import glob
 import os
+from green_screen import green_screen
 
 
 
@@ -14,7 +15,12 @@ def threed(im_name, c):
 	IMPORT_FILE_IMAGE = im_name
 	EXPORT_FILE_MODEL = f"surface_{c}.stl"
 
-	grey_img = Image.open(IMPORT_FILE_IMAGE).convert('L')
+	grey_img = Image.open(IMPORT_FILE_IMAGE).convert('RGB')
+	# open_cv_image = numpy.array(pil_image) 
+	# # Convert RGB to BGR 
+	# open_cv_image = open_cv_image[:, :, ::-1].copy() 
+
+	# mask = green_screen(IMPORT_FILE_IMAGE)
 
 	max_size=(500,500)
 	max_height=10
@@ -33,9 +39,13 @@ def threed(im_name, c):
 	vertices=np.zeros((nrows,ncols,3))
 
 	for x in range(0, ncols):
-		for y in range(0, nrows):
+		for y in range(0, nrows):			
+
 			pixelIntensity = imageNp[y][x]
-			z = (pixelIntensity * max_height) / maxPix
+			if mask[y][x] == 1:
+				z = 0
+			else:
+				z = (pixelIntensity * max_height) / maxPix
 			vertices[y][x]=(x, y, z)
 
 	faces=[]
@@ -93,6 +103,6 @@ def gen_models():
 	for f, i in list(zip(os.listdir(directory), range(len(os.listdir(directory))))):
 		filename = os.fsdecode(f)
 		threed(directory+'/'+filename, i)
-
+gen_models()
 
 

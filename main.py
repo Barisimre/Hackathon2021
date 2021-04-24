@@ -5,8 +5,8 @@ import glob
 
 
 # How long should the capture take in seconds (0 if no capture)
-SECONDS = 20
-CAM_IP = "130.89.137.189"
+SECONDS = 10
+CAM_IP = "130.89.88.108"
 # Run Floris lib
 FLORIS = False
 
