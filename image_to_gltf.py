@@ -9,8 +9,6 @@ import numpy as np
 from tqdm import tqdm
 
 
-def transpose(matrix):
-    return np.array([[matrix[j][i] for j in range(len(matrix))] for i in range(len(matrix[0]))])
 
 def get_heightmap():
 
@@ -22,7 +20,6 @@ def get_heightmap():
 
     images = [cv.imread(img_name, 0) for img_name in image_names]
 
-    images = [transpose(img) for img in images]
     images = np.array(images)
 
     master_image = np.std(images, 0) * 5
@@ -39,7 +36,7 @@ def get_heightmap():
     print('Done getting height map')
 
 
-    return master_image, transpose(cv.imread(image_names[0]))
+    return master_image, cv.imread(image_names[0])
 
 
 def image_to_gltf(filepath):

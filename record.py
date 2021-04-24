@@ -48,12 +48,11 @@ def get_video(seconds, ip):
     for r in raw:
 
         img_arr = np.array(bytearray(r.content), dtype=np.uint8)
-        print(img_arr.shape)
         img = cv2.imdecode(img_arr, -1)
         x = int(len(img[0])/4)
         xs = int(x * 3)
-        cropped = img[: , x:xs]
-        video.append((cropped, time.time()))
+        # cropped = img[: , x:xs]
+        video.append((img, time.time()))
 
     for v in video:
         cv2.imwrite(f"img/img_dump/{v[1]}.png", v[0])
