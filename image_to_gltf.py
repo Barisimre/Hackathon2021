@@ -38,12 +38,14 @@ def get_heightmap():
 
     print('Done getting height map')
 
-    return master_image, images[0]   
+
+    return master_image, transpose(cv.imread(image_names[0]))
 
 
 def image_to_gltf(filepath):
 
     heightmap, image = get_heightmap()
+    os.chdir('../../')
 
     heightmap = [[(px * 10000) ** (1/2) for px in col] for col in heightmap]
     background_pixels = get_green_screen(image)

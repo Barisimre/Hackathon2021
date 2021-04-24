@@ -15,6 +15,7 @@ def get_green_screen(image):
     upper_blue = np.array([180, 255, 180]) 
 
     mask = cv2.inRange(image_copy, lower_blue, upper_blue)
+
     mask2 = cv2.inRange(image, lower_blue, upper_blue)
 
     masked_image = np.copy(image)
