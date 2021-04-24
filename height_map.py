@@ -7,7 +7,7 @@ def build_heightmap(normals):
     min_height = 0
     for y in range(1, len(normals)):
         for x in range(len(normals[0])):
-            height_difference = math.cos(normals[y][x])
+            height_difference = math.cos(normals[y][x] / 180 * 3.1415)
             heights[y][x] = height_difference
             # heights[y][x] = heights[y][x - 1] + height_difference
 
