@@ -28,9 +28,6 @@ def threed(im_name, c):
 	maxPix=imageNp.max()
 	minPix=imageNp.min()
 
-
-
-	# print(imageNp)
 	(ncols,nrows)=grey_img.size
 
 	vertices=np.zeros((nrows,ncols,3))
@@ -61,7 +58,7 @@ def threed(im_name, c):
 			faces.append(face1)
 			faces.append(face2)
 
-	print(f"number of faces: {len(faces)}")
+	# print(f"number of faces: {len(faces)}")
 	facesNp = np.array(faces)
 	# Create the mesh
 	surface = mesh.Mesh(np.zeros(facesNp.shape[0], dtype=mesh.Mesh.dtype))
@@ -70,7 +67,7 @@ def threed(im_name, c):
 					surface.vectors[i][j] = facesNp[i][j]
 	# Write the mesh to file "cube.stl"
 	surface.save(f"stl/{EXPORT_FILE_MODEL}")
-	print(f"stl/{EXPORT_FILE_MODEL}")
+	# print(f"stl/{EXPORT_FILE_MODEL}")
 
 
 
@@ -91,7 +88,7 @@ def gen_models():
 					print('Could not remove the files')
 
 	directory = os.fsdecode("img/img_dump")
-	print(os.listdir(directory))
+	# print(os.listdir(directory))
 
 	for f, i in list(zip(os.listdir(directory), range(len(os.listdir(directory))))):
 		filename = os.fsdecode(f)

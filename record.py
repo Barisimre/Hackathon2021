@@ -7,7 +7,7 @@ import os
 import glob
 
 
-def get_video(seconds):
+def get_video(seconds, ip):
 
     print('Cleaning the folder')
     files = glob.glob('img/img_dump/*.png', recursive=True)
@@ -27,7 +27,7 @@ def get_video(seconds):
 
     while True:
         try:
-            url = "http://130.89.137.189:8080//shot.jpg"
+            url = f"http://{ip}:8080//shot.jpg"
             hacky_image = requests.get(url)
         except Exception as e:
             continue
