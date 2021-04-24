@@ -54,7 +54,7 @@ def get_video(seconds):
     for v in video:
         cv2.imwrite(f"img/img_dump/{v[1]}.png", v[0])
 
-    print('Done, images are in the folder')
+    print(f'Done, {len(video)} images are in the folder')
 
 
-get_video(7)
+# get_video(7)
