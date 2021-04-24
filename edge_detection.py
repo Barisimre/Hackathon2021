@@ -71,37 +71,57 @@ def edge_detection(img):
 
 
 if __name__ == "__main__":
-vi
-    img1 = cv.imread(src_folder + "keyboard1.jpg", 0)
-    img2 = cv.imread(src_folder + "keyboard2.jpg", 0)
+
+    img1 = cv.imread("Left.jpg", 0)
+    img2 = cv.imread("Right.jpg", 0)
+
+    cropped1 = img1
+    cropped2 = img2
+
+    cropped1 = cv.resize(cropped1, (500, 500))
+    cropped2 = cv.resize(cropped2, (500, 500))
+    # img1 = img1[400:2600,:]
+    # img2 = img2[400:2600,:]
+    # #
+    # # for x in range(len(img1[0])):
+    # #     for y in range(len(img1)):
+    # #         img1[y][x] = 100 if img1[y][x] > threshold else 0
     #
-    # for x in range(len(img1[0])):
-    #     for y in range(len(img1)):
-    #         img1[y][x] = 100 if img1[y][x] > threshold else 0
+    #
+    #
+    # plt.subplot(121)
+    # plt.imshow(img1, cmap = 'gray')
+    # plt.title('Original Image')
+    # plt.xticks([])
+    # plt.yticks([])
+    # plt.subplot(122)
+    # plt.imshow(img2, cmap = 'gray')
+    # plt.title('Edge Image')
+    # plt.xticks([])
+    # plt.yticks([])
+    # plt.show()
+    # print("Bounding Done")
 
-
-
+    # cropped1 = crop(img1)
+    # cropped2 = crop(img2)
+    # cv.imwrite(dest_folder + 'img1.jpg', cropped1)
+    # cv.imwrite(dest_folder + 'img2.jpg', cropped2)
+    #
+    # cropped1 = cv.resize(cropped1, (len(cropped2[0]), len(cropped2)))
     plt.subplot(121)
-    plt.imshow(img1, cmap = 'gray')
+    plt.imshow(cropped1, cmap='gray')
     plt.title('Original Image')
     plt.xticks([])
     plt.yticks([])
     plt.subplot(122)
-    plt.imshow(img2, cmap = 'gray')
+    plt.imshow(cropped2, cmap='gray')
     plt.title('Edge Image')
     plt.xticks([])
     plt.yticks([])
     plt.show()
-    print("Bounding Done")
-
-    cropped1 = crop(img1)
-    cropped2 = crop(img2)
-    cv.imwrite(dest_folder + 'img1.jpg', cropped1)
-    cv.imwrite(dest_folder + 'img2.jpg', cropped2)
-
-    cropped1 = cv.resize(cropped1, (len(cropped2[0]), len(cropped2)))
 
     stereo = cv.StereoBM_create(numDisparities=16, blockSize=15)
+
     disparity = stereo.compute(cropped1, cropped2)
     plt.imshow(disparity, 'gray')
     plt.show()
