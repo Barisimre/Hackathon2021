@@ -3,7 +3,7 @@ import cv2
 import numpy as np
   
 # Replace the below URL with your own. Make sure to add "/shot.jpg" at last.
-url = "http://130.89.137.189:8080//shot.jpg"
+url = "http://130.89.88.108:8080//shot.jpg"
   
 # While loop to continuously fetching data from the Url
 while True:

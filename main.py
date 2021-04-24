@@ -1,5 +1,5 @@
 from record import get_video
-from image_to_mesh import gen_models
+# from image_to_mesh import gen_models
 import os
 import glob
 

@@ -151,6 +151,6 @@ crashlytics-build.properties
 fabric.properties
 
 
-img/img_dump/*
+# img/img_dump/*
 
 stl/*
