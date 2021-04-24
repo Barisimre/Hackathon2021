@@ -2,7 +2,7 @@ import cv2 as cv
 from matplotlib import pyplot as plt
 
 src_folder = "img/keyboard_daan/"
-dest_folder = "edge_detection/"
+dest_folder = "cropped/"
 
 threshold = 20
 
@@ -71,7 +71,7 @@ def edge_detection(img):
 
 
 if __name__ == "__main__":
-
+vi
     img1 = cv.imread(src_folder + "keyboard1.jpg", 0)
     img2 = cv.imread(src_folder + "keyboard2.jpg", 0)
     #
@@ -82,14 +82,27 @@ if __name__ == "__main__":
 
 
     plt.subplot(121)
-    plt.imshow(edge_detection(crop(img2)), cmap = 'gray')
+    plt.imshow(img1, cmap = 'gray')
     plt.title('Original Image')
     plt.xticks([])
     plt.yticks([])
     plt.subplot(122)
-    plt.imshow(edge_detection(crop(img1)), cmap = 'gray')
+    plt.imshow(img2, cmap = 'gray')
     plt.title('Edge Image')
     plt.xticks([])
     plt.yticks([])
     plt.show()
-    print("done")
+    print("Bounding Done")
+
+    cropped1 = crop(img1)
+    cropped2 = crop(img2)
+    cv.imwrite(dest_folder + 'img1.jpg', cropped1)
+    cv.imwrite(dest_folder + 'img2.jpg', cropped2)
+
+    cropped1 = cv.resize(cropped1, (len(cropped2[0]), len(cropped2)))
+
+    stereo = cv.StereoBM_create(numDisparities=16, blockSize=15)
+    disparity = stereo.compute(cropped1, cropped2)
+    plt.imshow(disparity, 'gray')
+    plt.show()
+    print("Stereo done")
