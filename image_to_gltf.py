@@ -31,8 +31,8 @@ def get_heightmap():
     master_image = np.cbrt(master_image * 250000) * 4
     # master_image = n
     master_image = -master_image
-    plt.imshow(master_image, cmap='gray')
-    plt.show()
+    # plt.imshow(master_image, cmap='gray')
+    # plt.show()
     print('Done getting height map')
 
     green_screen_names = random.sample(image_names[:(len(image_names) // 4)], 20)
@@ -42,15 +42,15 @@ def get_heightmap():
     mask = screens[0]
 
     os.chdir('../../')
-    cv.imwrite("texture_source.png", images[0])
+    cv.imwrite("test.png", images[0])
 
     for i in tqdm(range(1, len(screens))):
         mask += screens[i]
 
-    return master_image, mask, "texture_source.png"
+    return master_image, mask, "test.png"
 
 
-def image_to_gltf(filepath):
+def image_to_gltf():
 
     heightmap, background_pixels, texture_file_location = get_heightmap()
 
@@ -73,4 +73,5 @@ def image_to_gltf(filepath):
     return heightmap
 
 
-image_to_gltf('img/origin.png')
+if __name__ == "__main__":
+    image_to_gltf()

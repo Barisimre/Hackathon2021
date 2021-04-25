@@ -1,20 +1,9 @@
 from record import get_video
-# from image_to_mesh import gen_models
-import os
-import glob
+from settings import *
+from image_to_gltf import image_to_gltf
 
-
-# How long should the capture take in seconds (0 if no capture)
-SECONDS = 20
-CAM_IP = "130.89.88.108"
-# Run Floris lib
-FLORIS = False
 
 # Capture
-get_video(SECONDS, CAM_IP)
-
-# Run floris
-
-if FLORIS:
-	gen_models()
+get_video(RECORDING_TIME, CAM_IP)
+image_to_gltf()
 
