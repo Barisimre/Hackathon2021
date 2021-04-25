@@ -42,25 +42,25 @@ def get_stl(gray, background):
 				vertice2 = vertices[y][x+1]
 				vertice3 = vertices[y+1][x+1]
 
-				face2 = np.array([vertice1,vertice2,vertice3])
+				face2 = np.array([vertice1,vertice3,vertice2])
 
 				faces.append(face1)
 				faces.append(face2)
 	
 	# Convert faces into mesh
-	facesNp = np.array(faces)
+	#facesNp = np.array(faces)
 	# Create the mesh
-	surface = mesh.Mesh(np.zeros(facesNp.shape[0], dtype=mesh.Mesh.dtype))
-	for i, f in enumerate(faces):
-			for j in range(3):
-					surface.vectors[i][j] = facesNp[i][j]
+	#surface = mesh.Mesh(np.zeros(facesNp.shape[0], dtype=mesh.Mesh.dtype))
+	#for i, f in enumerate(faces):
+	#		for j in range(3):
+	#				surface.vectors[i][j] = facesNp[i][j]
 	# Write the mesh to file "cube.stl"
 
 
-	export_file = f"stl/stlFile.stl"
-	surface.save(export_file)
+	#export_file = f"stl/stlFile.stl"
+	#surface.save(export_file)
 	# print(f"stl/{EXPORT_FILE_MODEL}")
-	return export_file
+	return faces
 
 
 

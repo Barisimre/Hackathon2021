@@ -8,7 +8,8 @@ import os
 import numpy as np
 from tqdm import tqdm
 import random
-
+from myGLTFCreator import create_gltf_file
+import cv2 as cv
 
 
 def get_heightmap():
@@ -25,7 +26,9 @@ def get_heightmap():
 
     # kernel = np.ones((3, 3), np.float32) / 9
     # master_image = cv.filter2D(master_image, -1, kernel)
+
     master_image = cv.blur(master_image, (5, 5)) * 1.5
+    
     # master_image = n
     master_image = -master_image
     plt.imshow(master_image, cmap='gray')
@@ -38,27 +41,34 @@ def get_heightmap():
     screens = np.array([get_green_screen(img) for img in tqdm(images)])
     mask = screens[0]
 
+    os.chdir('../../')
+    cv.imwrite("texture_source.png", images[0])
+
     for i in tqdm(range(1, len(screens))):
         mask += screens[i]
 
-    os.chdir('../../')
-    return master_image, mask
+    return master_image, mask, "texture_source.png"
 
 
 def image_to_gltf(filepath):
 
-    heightmap, background_pixels = get_heightmap()
+    heightmap, background_pixels, texture_file_location = get_heightmap()
 
 
     print('Make stl')
 
-    stl_path = get_stl(heightmap, background_pixels)
+    faces = get_stl(heightmap, background_pixels)
+
+    img = cv.imread(texture_file_location)
+    dims = (len(img[0]), len(img))
+    print("Dims: ", dims[0], dims[1])
 
     gltf_path = "gltf/keyboard.gltf"
 
     print('Make gltf')
 
-    stl_to_gltf(stl_path, gltf_path, True)
+    create_gltf_file(faces, "test.bin","test.gltf", texture_file_location, dims)
+    #stl_to_gltf(stl_path, gltf_path, True)
 
     return heightmap
 
