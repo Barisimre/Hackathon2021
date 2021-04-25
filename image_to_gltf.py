@@ -28,7 +28,7 @@ def get_heightmap():
     # master_image = cv.filter2D(master_image, -1, kernel)
 
     master_image = cv.blur(master_image, (5, 5)) * 1.5
-    
+    master_image = np.cbrt(master_image * 250000) * 4
     # master_image = n
     master_image = -master_image
     plt.imshow(master_image, cmap='gray')
