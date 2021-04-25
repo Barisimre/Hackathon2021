@@ -21,7 +21,7 @@ def get_stl(gray, background):
 		for x in range(len(gray[0])):
 			intensity = gray[y][x]
 			z = (intensity * max_height) / maxPix
-			vertices[y][x] = (x, y, z)
+			vertices[y][x] = (x / 100, y / 100, z / 100)
 
 
 	# Get faces from vertices that are not baackground
