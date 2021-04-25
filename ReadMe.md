@@ -1,6 +1,6 @@
-#ScannLit
+# ScannLit
 
-##To use the program:
+## To use the program:
 
 install IP Webcam on a phone
 
