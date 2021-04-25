@@ -53,18 +53,24 @@ def transpose(matrix):
 #     return normals
 
 
+def py(t1 ,t2):
+    a = (t1[0]-t2[0])**2
+    b = (t1[1]-t2[1])**2
+    c = (t1[2]-t2[2])**2
+
+    return b+a+c
+
 def detect_greenscreen_pixels(color_imgs):
     pxs = [[False for _ in range(len(color_imgs[0][0]))] for _ in range(len(color_imgs[0]))]
 
-    for index, i in enumerate(color_imgs):
-        if (index != 45) != 0:
-            continue
-        print("Collecting gs from image", index)
-        for y in range(len(i)):
-            for x in range(len(i[0])):
-                b, g, r = i[y][x]
-                if g > 70 and b < 70 and r > 70: # and r < 104 and b < 70:
-                    pxs[y][x] = True
+    for index, image in enumerate(color_imgs):
+
+        image_copy = np.copy(image)
+        image_copy = cv.cvtColor(image_copy, cv.COLOR_BGR2RGB)
+        plt.imshow(image)
+
+
+
     return pxs
 
 
